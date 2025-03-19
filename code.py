@@ -1,6 +1,3 @@
-
-python
-Copy
 from spike import PrimeHub, Motor, ColorSensor
 import time
 
