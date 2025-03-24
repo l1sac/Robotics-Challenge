@@ -19,7 +19,7 @@ def follow_line():
             motor_pair.move(motor_pair.PAIR_1, 0, velocity=280)
         else:
             time.sleep_ms(2)
-            motor_pair.move(motor_pair.PAIR_1, 90, velocity=280)
+            motor_pair.move(motor_pair.PAIR_1, -90, velocity=140)
 
 # time.sleep(0.05) can put it to ensure accuracy
 
