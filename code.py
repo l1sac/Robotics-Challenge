@@ -6,6 +6,7 @@ from hub import port
 import color_sensor
 import color
 import motor
+import time
 
 score = 0
 black = color_sensor.color(port.B) == color.BLACK
@@ -17,17 +18,17 @@ def follow_line():
         if color_sensor.color(port.B) == color.BLACK:
             motor_pair.move(motor_pair.PAIR_1, 0, velocity=280)
         else:
+            time.sleep_ms(2)
             motor_pair.move(motor_pair.PAIR_1, 90, velocity=280)
 
 # time.sleep(0.05) can put it to ensure accuracy
 
 def square_counter():
     global score
-    while True:
-        if color_sensor.color(port.B) == color.GREEN:
-            light_matrix.write("!")
-            score += 1
-            light_matrix.write(str(score))
+    if color_sensor.color(port.B) == color.GREEN:
+        light_matrix.write("!")
+        score += 1
+        light_matrix.write(str(score))
 
 async def main():
     while True:
