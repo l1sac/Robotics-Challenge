@@ -25,7 +25,7 @@ def square_counter():
     if color_sensor.color(port.B) == color.GREEN:
         light_matrix.write("!")
         score += 1
-        light_matrix.write(f'{score} + 1')
+        light_matrix.write(str(score))
 
 async def main():
     while True:
