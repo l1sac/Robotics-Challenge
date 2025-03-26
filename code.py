@@ -15,23 +15,23 @@ not_black = color_sensor.color(port.B) != color.BLACK
 motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)
 
 def follow_line():
+    global score
     while True:
         if color_sensor.color(port.B) == color.BLACK:
             motor_pair.move(motor_pair.PAIR_1, 0, velocity=280)
-        else:
-            time.sleep_ms(15)
-            motor_pair.move_for_degrees(motor_pair.PAIR_1, -90, -90, velocity=280)
-            time.sleep_ms(20)
-
-        global score
-        if color_sensor.color(port.B) == color.GREEN:
+        elif color_sensor.color(port.B) == color.GREEN:
             score += 1
             light_matrix.write(str(score))
-
+        else:
+            time.sleep_ms(20)
+            motor_pair.move_for_degrees(motor_pair.PAIR_1, 360, -90, velocity=100)
+            #if color_sensor.color(port.B) == color.WHITE:
+                #motor_pair.move_for_degrees(motor_pair.PAIR_1, -360, -90, velocity=100)
+                
 # time.sleep(0.05) can put it to ensure accuracy
 
 #def square_counter():
-    
+
 async def main():
     while True:
         follow_line()
