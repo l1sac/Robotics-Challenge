@@ -14,13 +14,24 @@ motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)
 async def main():
     global score
     while True:
-        if color_sensor.reflection(port.B) < 15:
+        reflection = color_sensor.reflection(port.B)
+
+        if reflection < 45:
             motor_pair.move(motor_pair.PAIR_1, 0, velocity=280)
-        elif 20 < color_sensor.reflection(port.B) < 40:
+        elif 45 < reflection < 60:
             score += 1
             light_matrix.write(str(score))
         else:
-            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 120, -90, velocity=100, stop=motor.BRAKE)
-            await motor_pair.move_for_degrees(motor_pair.PAIR_1, -240, -90, velocity=100, stop=motor.BRAKE)
+            
+            await motor_pair.move_for_degrees(motor_pair.PAIR_1, 60, -90, velocity=100 )
+
+            if color_sensor.reflection(port.B) < 45:
+                continue
+
+            await motor_pair.move_for_degrees(motor_pair.PAIR_1, -180, -90, velocity=100 )
+            
+            if color_sensor.reflection(port.B) < 45:
+                continue
         await runloop.sleep_ms(5)
+
 runloop.run(main())
