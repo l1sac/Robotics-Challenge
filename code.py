@@ -1,27 +1,31 @@
-from hub import light_matrix, port
+from hub import light_matrix
 from motor import velocity
 import runloop
 import motor_pair
+from hub import port
 import color_sensor
+import color
+import motor
 import time
 
-# Initialization
-motor_pair.pair(motor_pair.PAIR_1, port.A, port.B)
-light_matrix.write("!")
-color_sensor_port = port.B
 score = 0
-color = 6
+motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)
+
 async def main():
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 5000,0 , velocity=280)
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 0, velocity=280)
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 15000, 0, velocity= 280)
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 0, velocity=280)
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2500,0 , velocity=280)
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 0, velocity=280)
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 12500, 0, velocity= 280)
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 0, velocity=280)
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2500,0 , velocity=280)
     while True:
         global score
-        global color
-        if color_sensor.color(port.B) == color:
+        if color_sensor.color(port.B) == color.RED:
             motor_pair.stop(motor_pair.PAIR_1)
+        elif color_sensor.color(port.B) == color.GREEN:
             score += 1
             light_matrix.write(str(score))
-            await runloop.sleep_ms(2000)
-        else:
-            motor_pair.move_tank_for_time(motor_pair.PAIR_1, 1000, 1000, 500)
-        await runloop.sleep_ms(5)
-
 runloop.run(main())
