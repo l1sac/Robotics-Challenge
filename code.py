@@ -14,8 +14,9 @@ score = 0
 motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)
 detection_count = 0
 detection_threshold = 5
+last_green_detected = time.time()
 async def main():
-    global score, detection_count
+    global score, detection_count, last_green_detected
     
     while True:
         if distance_sensor.distance(port.A) < 800 : 
@@ -25,19 +26,18 @@ async def main():
                 detection_count = 0
 
         if color_sensor.color(port.B) == color.BLACK: # if black it will turn in one direction
-            await motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 100, 100, 100)
+            await motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 50, 100, 50)
 
         elif color_sensor.color(port.B) == color.WHITE: # if white it will turn in the other direction
-            await motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, -100, 100, 100)
+            await motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 50, 50, 100)
 
-        elif color_sensor.color(port.B) == color.GREEN: # score counter
+        if color_sensor.color(port.B) == color.GREEN and time.time() - last_green_detected > 2.5: # score counter
             score += 1
             light_matrix.write(str(score))
             motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, -50, 100, 100)
-            # await asyncio.sleep(1)
-            continue
+            last_green_detected = time.time()
 
-        elif color_sensor.color(port.B) == color.RED: # if detect anything else other than white, black and green (red) it will stop and beep
+        if color_sensor.color(port.B) == color.RED: # if detect anything else other than white, black and green (red) it will stop and beep
             motor_pair.stop(motor_pair.PAIR_1)
             await sound.beep(440, 500, 100)
             await sound.beep(500, 500, 100)
