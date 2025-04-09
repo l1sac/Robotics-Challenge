@@ -21,28 +21,33 @@ was_on_green = False
 async def main():
     global score, detection_count, was_on_green
     while True:
-        if distance_sensor.distance(port.A) < 800: # detect when the distance is less than 8 cm
+        motor.run_for_time(port.E, 500, 300)
+        if distance_sensor.distance(port.A) < 150: # detect when the distance is less than 15 cm
             detection_count += 1
-            motor.run_for_time(port.E, 500, 100)
-            if detection_count > 5: # only beeps when the detection_count is above 5
+            if detection_count > 5: # only beeps (substitute for quack sound) when the detection_count is above 5
                 await sound.beep(200, 500, 25)
-                detection_count = 0 # resets 
+                detection_count = 0 # resets the detection_count
 
-        if color_sensor.color(port.B) == color.BLACK: # if black it will turn right
-             motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 40, 100, 60)
+        if color_sensor.color(port.B) == color.BLACK: # if it senses black it will turn right
+            motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 40, 100, 60)
 
-        elif color_sensor.color(port.B) == color.WHITE: # if white it will turn left
-            motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 40, 60, 100)
+        elif color_sensor.color(port.B) == color.WHITE: # if it senses white it will turn left
+            motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 30, 60, 100)
 
         if color_sensor.color(port.B) == color.GREEN: # score counter
             if not was_on_green:
                 score += 1
                 light_matrix.write(str(score))
                 was_on_green = True
+                #keeps moving after it senses green (in progress)
+                motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 0, 50, 50)
+                #stops after sensing a certain amount of green squares (in progress)
+                if score == 10:
+                    light_matrix.clear()
         else:
             was_on_green = False
 
-        if color_sensor.color(port.B) == color.RED : # if colour is red it will stop and play a success tune
+        if color_sensor.color(port.B) == color.RED : # if the colour sensed is red it will stop and play a success tune
             motor_pair.stop(motor_pair.PAIR_1)
             await sound.beep(440, 500, 100)
             await sound.beep(500, 500, 100)
