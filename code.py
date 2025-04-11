@@ -29,10 +29,10 @@ async def main():
                 detection_count = 0 # resets the detection_count
 
         if color_sensor.color(port.B) == color.BLACK: # if it senses black it will turn right
-            motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 40, 160, 120)
+            motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 30, 140, 100)
 
         elif color_sensor.color(port.B) == color.WHITE: # if it senses white it will turn left
-            motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 40, 120, 160)
+            motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 30, 100, 140)
 
         if color_sensor.color(port.B) == color.GREEN: # score counter
             if not was_on_green:
@@ -42,8 +42,9 @@ async def main():
                 motor_pair.move_tank_for_degrees(motor_pair.PAIR_1, 0, 80, 80)
                 was_on_green = True
                 #stops after sensing a certain amount of green squares
-                if score == 10:
+                if score == 11:
                     light_matrix.clear()
+                    
         else:
             was_on_green = False
 
