@@ -8,38 +8,30 @@ import distance_sensor
 import color
 import motor
 import time
-from app import sound
+from hub import sound
+import asyncio
 
-#variables
-score = 0
-detection_count = 0
 motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)
-was_on_green = False
 
 async def main():
-    global score, was_on_green, detection_count
-    motor.run_for_time(port.E, 10000, 500) #can knocker
-    motor_pair.move_for_time(motor_pair.PAIR_1, 4800, 0, velocity=360)
-    if color_sensor.color(port.B) == color.GREEN: #needs adjustment, this is for green square counter
-            if not was_on_green:
-                score += 1
-                light_matrix.write(str(score))
-                was_on_green = True
-                motor_pair.move(motor_pair.PAIR_1, -75) #keeps moving after it senses green
-                #clears light matrix after sensing a certain amount of green squares and allows it to keep moving
-                if score == 11:
-                    light_matrix.clear()
-                    motor_pair.move(motor_pair.PAIR_1, 0)
-
-    #might change it to play when a certain amount of distance has been travelled or certain amount of rotations has been made               
-    if distance_sensor.distance(port.A) < 150: # detect when the distance is less than 15 cm
-        detection_count += 1
-        if detection_count > 5: #to detect when to play squeak tone
-            sound.play('Squeaky Toy', 80, 50)
-            detection_count = 0 # resets the detection_count
-
-    #stops robot and plays the success tune at the end of the course
-    motor_pair.stop(motor_pair.PAIR_1)
-    sound.play('Emotional Piano', 80, 50)
-
+    global score
+    await asyncio.gather( 
+        motor_pair.move_for_time(motor_pair.PAIR_1, 4845, 0, velocity=360),
+        motor.run_for_time(port.E, 4845, velocity=360)
+        )
+    await light_matrix.write('1')
+    await asyncio.gather(
+        motor_pair.move_for_time(motor_pair.PAIR_1, 1418, 0, velocity=360),
+        motor.run_for_time(port.E, 1418, velocity=360)
+        )
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 90, velocity = 200)
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 1384, 0, velocity=360)
+    await light_matrix.write('2')
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 5536, 0, velocity=360)
+    await light_matrix.write('3')
+    await asyncio.gather(
+        motor_pair.move_for_time(motor_pair.PAIR_1, 2560, 0, velocity=360),
+        motor.run_for_time(port.E, 2560, velocity=360)
+        )
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 6643, 0, velocity=360)
 runloop.run(main())
