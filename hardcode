@@ -8,7 +8,7 @@ import distance_sensor
 import color
 import motor
 import time
-from hub import sound
+from app import sound
 
 #variables
 score = 0
@@ -33,7 +33,7 @@ async def main():
     #might change it to play when a certain amount of distance has been travelled or certain amount of rotations has been made               
     if distance_sensor.distance(port.A) < 150: # detect when the distance is less than 15 cm
         detection_count += 1
-        if detection_count > 5: #to detect when to play squeak upon retrieving duck
+        if detection_count > 5: #to detect when to play squeak tone
             sound.play('Squeaky Toy', 80, 50)
             detection_count = 0 # resets the detection_count
 
