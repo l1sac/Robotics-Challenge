@@ -18,6 +18,7 @@ was_on_green = False
 
 async def main():
     global score, was_on_green, detection_count
+    motor.run_for_time(port.E, 10000, 500) #can knocker
     motor_pair.move_for_time(motor_pair.PAIR_1, 4800, 0, velocity=360)
     if color_sensor.color(port.B) == color.GREEN: #needs adjustment, this is for green square counter
             if not was_on_green:
@@ -25,7 +26,7 @@ async def main():
                 light_matrix.write(str(score))
                 was_on_green = True
                 motor_pair.move(motor_pair.PAIR_1, -75) #keeps moving after it senses green
-                #stops after sensing a certain amount of green squares
+                #clears light matrix after sensing a certain amount of green squares and allows it to keep moving
                 if score == 11:
                     light_matrix.clear()
                     motor_pair.move(motor_pair.PAIR_1, 0)
@@ -36,5 +37,9 @@ async def main():
         if detection_count > 5: #to detect when to play squeak tone
             sound.play('Squeaky Toy', 80, 50)
             detection_count = 0 # resets the detection_count
+
+    #stops robot and plays the success tune at the end of the course
+    motor_pair.stop(motor_pair.PAIR_1)
+    sound.play('Emotional Piano', 80, 50)
 
 runloop.run(main())
