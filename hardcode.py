@@ -15,7 +15,7 @@ motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)
 
 async def main():
     global score
-    await asyncio.gather( 
+    await asyncio.gather(
         motor_pair.move_for_time(motor_pair.PAIR_1, 4845, 0, velocity=360), # up to first gs
         motor.run_for_time(port.E, 4845, velocity=360)
         )
@@ -24,7 +24,7 @@ async def main():
         motor_pair.move_for_time(motor_pair.PAIR_1, 1418, 0, velocity=360), # up to middle of first circle
         motor.run_for_time(port.E, 1418, velocity=360)
         )
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 90, velocity = 200) # turn 90 degrees
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn 90 degrees
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1384, 0, velocity=360) # to second gs
     await light_matrix.write('2')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 5536, 0, velocity=360) # to third gs
@@ -35,12 +35,12 @@ async def main():
         )
     await light_matrix.write('4')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 6643, 0, velocity=360) # to corner
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 90, velocity = 200) # turn
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn
     await asyncio.gather(
-        motor_pair.move_for_time(motor_pair.PAIR_1, 4152, 0, velocity=360), 
+        motor_pair.move_for_time(motor_pair.PAIR_1, 4152, 0, velocity=360),
         motor.run_for_time(port.E, 4152, velocity=360)
         )
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 90, velocity = 200) # turn
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn
     await asyncio.gather(
         motor_pair.move_for_time(motor_pair.PAIR_1, 11487, 0, velocity=360), # to fifth gs
         motor.run_for_time(port.E, 6000, velocity=360)
@@ -50,14 +50,14 @@ async def main():
         motor_pair.move_for_time(motor_pair.PAIR_1, 1418, 0, velocity=360), # up to middle of second circle
         motor.run_for_time(port.E, 1418, velocity=360)
         )
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 90, velocity = 200) # turn 90 degrees
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn 90 degrees
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1384, 0, velocity=360) # to sixth gs
-    await light_matrix.write('6') 
+    await light_matrix.write('6')
     await asyncio.gather(
-        motor_pair.move_for_time(motor_pair.PAIR_1, 2837, 0, velocity=360), 
+        motor_pair.move_for_time(motor_pair.PAIR_1, 2837, 0, velocity=360),
         motor.run_for_time(port.E, 2837, velocity=360)
         )
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 90, 90, velocity = 200) # turn 90 degrees
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn 90 degrees
     await motor_pair.move_for_time(motor_pair.PAIR_1, 6712, 0, velocity=360) # up to 7th gs
     await light_matrix.write('7')
     await asyncio.gather(
