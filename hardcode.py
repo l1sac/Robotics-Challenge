@@ -34,7 +34,7 @@ async def main():
     motor.run_for_time(port.E, 4152, velocity=360)
     await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn
     await motor_pair.move_for_time(motor_pair.PAIR_1, 6228, 0, velocity=360) # to duck
-    motor.run_for_time(port.E, 6000, velocity=360)
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 1829, 0, velocity=360) # to 5th gs
     await light_matrix.write('5')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1087, 0, velocity=360), # to middle of second circle
     motor.run_for_time(port.E, 1418, velocity=360)
