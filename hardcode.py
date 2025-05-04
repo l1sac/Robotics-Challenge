@@ -30,25 +30,25 @@ async def main():
     await light_matrix.write('4')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 4745, 0, velocity=360) # to corner
     await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn
-    await motor_pair.move_for_time(motor_pair.PAIR_1, 2966, 0, velocity=360) # to corner 
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2966, 0, velocity=360) # to corner
     motor.run_for_time(port.E, 4152, velocity=360)
     await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn
     await motor_pair.move_for_time(motor_pair.PAIR_1, 6228, 0, velocity=360) # to duck
     motor.run_for_time(port.E, 6000, velocity=360)
     await light_matrix.write('5')
-    await motor_pair.move_for_time(motor_pair.PAIR_1, 1418, 0, velocity=360), # all  time arguments below here (n including) needs to be modified + add 1 or 2 lines
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 1087, 0, velocity=360), # to middle of second circle
     motor.run_for_time(port.E, 1418, velocity=360)
     await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn 90 degrees
-    await motor_pair.move_for_time(motor_pair.PAIR_1, 1384, 0, velocity=360) # to sixth gs
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 989, 0, velocity=360) # to sixth gs
     await light_matrix.write('6')
-    await motor_pair.move_for_time(motor_pair.PAIR_1, 2837, 0, velocity=360)
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2027, 0, velocity=360)
     motor.run_for_time(port.E, 2837, velocity=360)
     await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn 90 degrees
-    await motor_pair.move_for_time(motor_pair.PAIR_1, 6712, 0, velocity=360) # up to 7th gs
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 4794, 0, velocity=360) # up to 7th gs
     await light_matrix.write('7')
-    await motor_pair.move_for_time(motor_pair.PAIR_1, 3218, 0, velocity=360) # up to 8th gs
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2298, 0, velocity=360) # up to 8th gs
     motor.run_for_time(port.E, 3218, velocity=360)
     await light_matrix.write('8')
-    await motor_pair.move_for_time(motor_pair.PAIR_1, 4186, 0, velocity=360) # up to red end
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2990, 0, velocity=360) # up to red end
     await sound.play('Emotional Piano')
 runloop.run(main())
