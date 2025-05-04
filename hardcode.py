@@ -10,15 +10,15 @@ from hub import sound
 motor_pair.pair(motor_pair.PAIR_1, port.C, port.D)
 
 async def main():
-    #await motor_pair.move_for_time(motor_pair.PAIR_1, 2076, 0, velocity=360) # up to first can works !
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2076, 0, velocity=360) # up to first can works !
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200) # remove can
-    #await motor_pair.move_for_time(motor_pair.PAIR_1, 2500, 0, velocity=360) # up to first gs works
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 2500, 0, velocity=360) # up to first gs works
     #await light_matrix.write('1')
-    #await motor_pair.move_for_time(motor_pair.PAIR_1, 1490, 0, velocity=360) # up to middle of first circle works
+    await motor_pair.move_for_time(motor_pair.PAIR_1, 1490, 0, velocity=360) # up to middle of first circle works
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200) # remove can
-    #await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn 90 degrees
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 90, velocity = 200) # turn 90 degrees
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1475, 0, velocity=360) # to second gs
     await light_matrix.write('2')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 5000, 0, velocity=360) # to third gs
@@ -38,7 +38,8 @@ async def main():
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200) # remove can
     await motor_pair.move_for_time(motor_pair.PAIR_1, 3228, 0, velocity=360) # to duck
-    await sound.beep(400, 500, 80)
+    await sound.beep(440, 500, 100)
+    await sound.beep(440, 500, 100)
     await motor_pair.move_for_time(motor_pair.PAIR_1, 2829, 0, velocity=360) # to 5th gs
     await light_matrix.write('5')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1490, 0, velocity=360) # to middle of second circle
