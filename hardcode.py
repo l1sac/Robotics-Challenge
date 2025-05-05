@@ -18,7 +18,7 @@ async def main():
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1350, 0, velocity=360) # up to middle of first circle works
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200) # remove can
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 210, -90, velocity = 200) # turn 90 degrees
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, -90, velocity = 200) # turn 90 degrees
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1300, 0, velocity=360) # to second gs
     await light_matrix.write('2')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 4800, 0, velocity=360) # to third gs
@@ -29,11 +29,11 @@ async def main():
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1100, 0, velocity=360) # to fourth gs
     await light_matrix.write('4')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 6000, 0, velocity=360) # to corner
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 210, -90, velocity = 200) # turn
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, -90, velocity = 200) # turn
     await motor_pair.move_for_time(motor_pair.PAIR_1, 3800, 0, velocity=360) # to corner
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200)
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 210, -90, velocity = 200) # turn
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, -90, velocity = 200) # turn
     await motor_pair.move_for_time(motor_pair.PAIR_1, 4000, 0, velocity=360) # to can
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200) # remove can
@@ -45,13 +45,13 @@ async def main():
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1490, 0, velocity=360) # to middle of second circle
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200) # remove can
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 210, 90, velocity = 200) # turn 90 degrees
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, 90, velocity = 200) # turn 90 degrees
     await motor_pair.move_for_time(motor_pair.PAIR_1, 475, 0, velocity=360) # to sixth gs
     await light_matrix.write('6')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 2627, 0, velocity=360) # to corner
     #await motor.run_for_time(port.E, 2000, velocity=360) # knock over can
     #await runloop.sleep_ms(1200) # remove can
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 210, 90, velocity = 200) # turn 90 degrees
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, 90, velocity = 200) # turn 90 degrees
     await motor_pair.move_for_time(motor_pair.PAIR_1, 6000, 0, velocity=360) # up to 7th gs
     await light_matrix.write('7')
     await motor_pair.move_for_time(motor_pair.PAIR_1, 1298, 0, velocity=360) # up to 8th can
